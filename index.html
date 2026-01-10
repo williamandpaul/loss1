@@ -7,35 +7,49 @@
 <body>
 
   <h1>loss1</h1>
-  <p>All audio plays simultaneously.</p>
+  <p>Each track loops forever. Use the buttons to mute/unmute individually.</p>
 
-  <!-- Mute / Unmute button -->
-  <button id="muteButton">Unmute</button>
+  <!-- Track 1 -->
+  <p>Track 1: paul_aco2_1.wav</p>
+  <button class="muteButton" data-track="0">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_1.wav" loop muted></audio>
 
-  <!-- Hidden audio elements -->
-  <audio class="track" src="audio/track1.mp3" loop muted></audio>
-  <audio class="track" src="audio/track2.mp3" loop muted></audio>
-  <audio class="track" src="audio/track3.mp3" loop muted></audio>
+  <!-- Track 2 -->
+  <p>Track 2: paul_aco2_2.wav</p>
+  <button class="muteButton" data-track="1">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_2.wav" loop muted></audio>
+
+  <!-- Track 3 -->
+  <p>Track 3: paul_aco2_3.wav</p>
+  <button class="muteButton" data-track="2">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_3.wav" loop muted></audio>
+
+  <!-- Track 4 -->
+  <p>Track 4: paul_aco2_4.wav</p>
+  <button class="muteButton" data-track="3">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_4.wav" loop muted></audio>
+
+  <!-- Track 5 -->
+  <p>Track 5: paul_aco2_5.wav</p>
+  <button class="muteButton" data-track="4">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_5.wav" loop muted></audio>
 
   <script>
     const tracks = document.querySelectorAll('.track');
-    const button = document.getElementById('muteButton');
+    const buttons = document.querySelectorAll('.muteButton');
 
-    let isMuted = true;
+    // Attempt to start all tracks (may require first click on mobile)
+    tracks.forEach(track => track.play());
 
-    // Start all tracks together
-    tracks.forEach(track => {
-      track.play();
-    });
+    // Add click listener for each mute/unmute button
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const index = button.getAttribute('data-track');
+        const track = tracks[index];
 
-    button.addEventListener('click', () => {
-      isMuted = !isMuted;
-
-      tracks.forEach(track => {
-        track.muted = isMuted;
+        track.muted = !track.muted; // toggle mute/unmute
+        button.textContent = track.muted ? 'Unmute' : 'Mute';
       });
-
-      button.textContent = isMuted ? 'Unmute' : 'Mute';
     });
   </script>
 
