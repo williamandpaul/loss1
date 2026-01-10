@@ -6,35 +6,38 @@
 </head>
 <body>
 
-  <!-- Page header -->
-  <h1>loss and change</h1>
-  <p>audio files</p>
+  <h1>loss1</h1>
+  <p>All audio plays simultaneously.</p>
 
-  <hr>
+  <!-- Mute / Unmute button -->
+  <button id="muteButton">Unmute</button>
 
-  <!-- Section 1 -->
-  <h2>About</h2>
-  <p>
-    click any button
-  </p>
+  <!-- Hidden audio elements -->
+  <audio class="track" src="audio/track1.mp3" loop muted></audio>
+  <audio class="track" src="audio/track2.mp3" loop muted></audio>
+  <audio class="track" src="audio/track3.mp3" loop muted></audio>
 
-  <hr>
+  <script>
+    const tracks = document.querySelectorAll('.track');
+    const button = document.getElementById('muteButton');
 
-  <!-- Section 2 -->
-  <h2>Works</h2>
+    let isMuted = true;
 
-  <p><strong>Piece One</strong></p>
-  <p>Short description of the first piece.</p>
+    // Start all tracks together
+    tracks.forEach(track => {
+      track.play();
+    });
 
-  <p><strong>Piece Two</strong></p>
-  <p>Short description of the second piece.</p>
+    button.addEventListener('click', () => {
+      isMuted = !isMuted;
 
-  <hr>
+      tracks.forEach(track => {
+        track.muted = isMuted;
+      });
 
-  <!-- Footer -->
-  <p>
-    © 2026
-  </p>
+      button.textContent = isMuted ? 'Unmute' : 'Mute';
+    });
+  </script>
 
 </body>
 </html>
