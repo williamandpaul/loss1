@@ -3,39 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <title>loss1</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Garamond, serif;
+    }
+
+    h1, p {
+      margin: 5px 0;
+    }
+
+    /* Start and Mute All buttons */
+    #startAll, #muteAll {
+      background-color: #333;
+      color: white;
+      font-family: Garamond, serif;
+      font-size: 18px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      margin-right: 10px;
+    }
+
+    #startAll:hover, #muteAll:hover {
+      background-color: #555;
+    }
+
+    /* Volume sliders styled for black/white theme */
+    .volumeSlider {
+      -webkit-appearance: none;
+      width: 200px;
+      height: 6px;
+      background: #555;
+      border-radius: 3px;
+      outline: none;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .volumeSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      margin-top: -5px; /* center thumb */
+    }
+
+    .volumeSlider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .volumeSlider::-ms-thumb {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
 
-  <h1>loss1</h1>
-  <p>All audio plays simultaneously.</p>
+  <h1>loss and change</h1>
+  <p>Every track on its own, together</p>
 
-  <!-- Mute / Unmute button -->
-  <button id="muteButton">Unmute</button>
+  <!-- Buttons -->
+  <button id="startAll">Start All</button>
+  <button id="muteAll">Mute All</button>
 
-  <!-- Hidden audio elements -->
-  <audio class="track" src="audio/track1.mp3" loop muted></audio>
-  <audio class="track" src="audio/track2.mp3" loop muted></audio>
-  <audio class="track" src="audio/track3.mp3" loop muted></audio>
+  <!-- Track 1 -->
+  <p>aco2_1.wav</p>
+  <input type="range" class="volumeSlider" data-track="0" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_1.wav" loop></audio>
+
+  <!-- Track 2 -->
+  <p>aco2_2.wav</p>
+  <input type="range" class="volumeSlider" data-track="1" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_2.wav" loop></audio>
+
+  <!-- Track 3 -->
+  <p>aco2_3.wav</p>
+  <input type="range" class="volumeSlider" data-track="2" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_3.wav" loop></audio>
+
+  <!-- Track 4 -->
+  <p>aco2_4.wav</p>
+  <input type="range" class="volumeSlider" data-track="3" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_4.wav" loop></audio>
+
+  <!-- Track 5 -->
+  <p>aco2_5.wav</p>
+  <input type="range" class="volumeSlider" data-track="4" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_5.wav" loop></audio>
 
   <script>
     const tracks = document.querySelectorAll('.track');
-    const button = document.getElementById('muteButton');
+    const sliders = document.querySelectorAll('.volumeSlider');
+    const startButton = document.getElementById('startAll');
+    const muteButton = document.getElementById('muteAll');
 
-    let isMuted = true;
-
-    // Start all tracks together
-    tracks.forEach(track => {
-      track.play();
+    // Start all tracks simultaneously
+    startButton.addEventListener('click', () => {
+      tracks.forEach(track => {
+        track.volume = 1; // start unmuted at full volume
+        track.play().catch(() => {
+          console.log("User interaction required to start audio.");
+        });
+      });
+      startButton.disabled = true;
+      startButton.textContent = "All Playing";
     });
 
-    button.addEventListener('click', () => {
-      isMuted = !isMuted;
-
-      tracks.forEach(track => {
-        track.muted = isMuted;
+    // Mute all tracks
+    muteButton.addEventListener('click', () => {
+      tracks.forEach((track, i) => {
+        track.volume = 0;
+        sliders[i].value = 0;
       });
+    });
 
-      button.textContent = isMuted ? 'Unmute' : 'Mute';
+    // Individual volume sliders
+    sliders.forEach((slider, i) => {
+      slider.addEventListener('input', () => {
+        const track = tracks[i];
+        track.volume = parseFloat(slider.value);
+      });
     });
   </script>
 
