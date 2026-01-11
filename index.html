@@ -85,9 +85,30 @@
     const muteButtons = document.querySelectorAll('.muteButton');
     const startButton = document.getElementById('startAll');
 
-    // Start all tracks together
+    // Start all tracks together, muted
     startButton.addEventListener('click', () => {
       tracks.forEach(track => {
+        track.muted = true; // ensure all start muted
         track.play().catch(() => {
           console.log("User interaction required to start audio.");
         });
+      });
+      startButton.disabled = true;
+      startButton.textContent = "All Playing (Muted)";
+    });
+
+    // Individual mute/unmute buttons
+    muteButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const index = button.getAttribute('data-track');
+        const track = tracks[index];
+
+        // toggle mute
+        track.muted = !track.muted;
+        button.textContent = track.muted ? 'I' : 'O';
+      });
+    });
+  </script>
+
+</body>
+</html>
