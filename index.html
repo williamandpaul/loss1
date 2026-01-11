@@ -7,49 +7,64 @@
 <body>
 
   <h1>loss1</h1>
-  <p>Each track loops forever. Click the buttons to mute/unmute individually.</p>
+  <p>Click "Start All" to play all tracks at once. Then you can mute/unmute individually.</p>
+
+  <!-- Single start button -->
+  <button id="startAll">Start All (Muted)</button>
+
+  <hr>
 
   <!-- Track 1 -->
   <p>Track 1: paul_aco2_1.wav</p>
-  <button onclick="toggleMute('track1', this)">Unmute</button>
-  <audio id="track1" src="audio/paul_aco2_1.wav" loop muted></audio>
+  <button class="muteButton" data-track="0">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_1.wav" loop muted></audio>
 
   <!-- Track 2 -->
   <p>Track 2: paul_aco2_2.wav</p>
-  <button onclick="toggleMute('track2', this)">Unmute</button>
-  <audio id="track2" src="audio/paul_aco2_2.wav" loop muted></audio>
+  <button class="muteButton" data-track="1">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_2.wav" loop muted></audio>
 
   <!-- Track 3 -->
   <p>Track 3: paul_aco2_3.wav</p>
-  <button onclick="toggleMute('track3', this)">Unmute</button>
-  <audio id="track3" src="audio/paul_aco2_3.wav" loop muted></audio>
+  <button class="muteButton" data-track="2">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_3.wav" loop muted></audio>
 
   <!-- Track 4 -->
   <p>Track 4: paul_aco2_4.wav</p>
-  <button onclick="toggleMute('track4', this)">Unmute</button>
-  <audio id="track4" src="audio/paul_aco2_4.wav" loop muted></audio>
+  <button class="muteButton" data-track="3">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_4.wav" loop muted></audio>
 
   <!-- Track 5 -->
   <p>Track 5: paul_aco2_5.wav</p>
-  <button onclick="toggleMute('track5', this)">Unmute</button>
-  <audio id="track5" src="audio/paul_aco2_5.wav" loop muted></audio>
+  <button class="muteButton" data-track="4">Unmute</button>
+  <audio class="track" src="audio/paul_aco2_5.wav" loop muted></audio>
 
   <script>
-    // Function to toggle mute/unmute per track
-    function toggleMute(trackId, button) {
-      const audio = document.getElementById(trackId);
+    const tracks = document.querySelectorAll('.track');
+    const muteButtons = document.querySelectorAll('.muteButton');
+    const startButton = document.getElementById('startAll');
 
-      // Play the track if it hasn't started yet
-      if (audio.paused) {
-        audio.play().catch(() => {
-          console.log("User interaction required to start audio");
+    // Start all tracks together
+    startButton.addEventListener('click', () => {
+      tracks.forEach(track => {
+        track.play().catch(() => {
+          console.log("User interaction required to start audio.");
         });
-      }
+      });
+      startButton.disabled = true;
+      startButton.textContent = "All Playing (Muted)";
+    });
 
-      // Toggle mute
-      audio.muted = !audio.muted;
-      button.textContent = audio.muted ? 'Unmute' : 'Mute';
-    }
+    // Individual mute/unmute buttons
+    muteButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const index = button.getAttribute('data-track');
+        const track = tracks[index];
+
+        track.muted = !track.muted;
+        button.textContent = track.muted ? 'Unmute' : 'Mute';
+      });
+    });
   </script>
 
 </body>
