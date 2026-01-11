@@ -2,12 +2,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>loss1</title>
+  <title>loss and change</title>
   <style>
     body {
       background-color: black;
       color: white;
       font-family: Garamond, serif;
+    }
+
+    h1, p {
+      margin: 20px 0;
     }
 
     #startAll {
@@ -26,86 +30,69 @@
       background-color: #555;
     }
 
-    .muteButton {
-      background-color: #333;
-      color: white;
-      font-family: Garamond, serif;
-      font-size: 16px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 5px;
+    .volumeSlider {
+      width: 200px;
+      margin-bottom: 15px;
       cursor: pointer;
-      margin-bottom: 10px;
-    }
-
-    .muteButton:hover {
-      background-color: #555;
-    }
-
-    p {
-      margin: 5px 0;
     }
   </style>
 </head>
 <body>
 
   <h1>loss and change</h1>
-  <p>every track on its own, together</p>
+  <p>Every track on its own, together</p>
 
-  <!-- Single start button -->
-  <button id="startAll">start</button>
+  <!-- Start all tracks button -->
+  <button id="startAll">Start All</button>
 
   <!-- Track 1 -->
   <p>aco2_1.wav</p>
-  <button class="muteButton" data-track="0">O</button>
-  <audio class="track" src="audio/paul_aco2_1.wav" loop muted></audio>
+  <input type="range" class="volumeSlider" data-track="0" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_1.wav" loop></audio>
 
   <!-- Track 2 -->
   <p>aco2_2.wav</p>
-  <button class="muteButton" data-track="1">O</button>
-  <audio class="track" src="audio/paul_aco2_2.wav" loop muted></audio>
+  <input type="range" class="volumeSlider" data-track="1" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_2.wav" loop></audio>
 
   <!-- Track 3 -->
   <p>aco2_3.wav</p>
-  <button class="muteButton" data-track="2">O</button>
-  <audio class="track" src="audio/paul_aco2_3.wav" loop muted></audio>
+  <input type="range" class="volumeSlider" data-track="2" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_3.wav" loop></audio>
 
   <!-- Track 4 -->
   <p>aco2_4.wav</p>
-  <button class="muteButton" data-track="3">O</button>
-  <audio class="track" src="audio/paul_aco2_4.wav" loop muted></audio>
+  <input type="range" class="volumeSlider" data-track="3" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_4.wav" loop></audio>
 
   <!-- Track 5 -->
   <p>aco2_5.wav</p>
-  <button class="muteButton" data-track="4">O</button>
-  <audio class="track" src="audio/paul_aco2_5.wav" loop muted></audio>
+  <input type="range" class="volumeSlider" data-track="4" min="0" max="1" step="0.01" value="1">
+  <audio class="track" src="audio/paul_aco2_5.wav" loop></audio>
 
   <script>
     const tracks = document.querySelectorAll('.track');
-    const muteButtons = document.querySelectorAll('.muteButton');
+    const sliders = document.querySelectorAll('.volumeSlider');
     const startButton = document.getElementById('startAll');
 
-    // Start all tracks together, muted
+    // Start all tracks simultaneously
     startButton.addEventListener('click', () => {
       tracks.forEach(track => {
-        track.muted = true; // ensure all start muted
+        track.volume = 1; // start unmuted at full volume
         track.play().catch(() => {
           console.log("User interaction required to start audio.");
         });
       });
       startButton.disabled = true;
-      startButton.textContent = "All Playing (Muted)";
+      startButton.textContent = "All Playing";
     });
 
-    // Individual mute/unmute buttons
-    muteButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const index = button.getAttribute('data-track');
+    // Individual volume sliders
+    sliders.forEach(slider => {
+      slider.addEventListener('input', () => {
+        const index = slider.getAttribute('data-track');
         const track = tracks[index];
-
-        // toggle mute
-        track.muted = !track.muted;
-        button.textContent = track.muted ? 'I' : 'O';
+        track.volume = parseFloat(slider.value);
       });
     });
   </script>
