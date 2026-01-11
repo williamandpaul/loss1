@@ -3,6 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <title>loss1</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Garamond, serif;
+    }
+
+    #startAll {
+      background-color: #333;
+      color: white;
+      font-family: Garamond, serif;
+      font-size: 18px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    #startAll:hover {
+      background-color: #555;
+    }
+
+    .muteButton {
+      background-color: #333;
+      color: white;
+      font-family: Garamond, serif;
+      font-size: 16px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .muteButton:hover {
+      background-color: #555;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -12,31 +55,29 @@
   <!-- Single start button -->
   <button id="startAll">start</button>
 
-  <hr>
-
   <!-- Track 1 -->
   <p>aco2_1.wav</p>
-  <button class="muteButton" data-track="0">Unmute</button>
+  <button class="muteButton" data-track="0">O</button>
   <audio class="track" src="audio/paul_aco2_1.wav" loop muted></audio>
 
   <!-- Track 2 -->
   <p>aco2_2.wav</p>
-  <button class="muteButton" data-track="1">Unmute</button>
+  <button class="muteButton" data-track="1">O</button>
   <audio class="track" src="audio/paul_aco2_2.wav" loop muted></audio>
 
   <!-- Track 3 -->
   <p>aco2_3.wav</p>
-  <button class="muteButton" data-track="2">Unmute</button>
+  <button class="muteButton" data-track="2">O</button>
   <audio class="track" src="audio/paul_aco2_3.wav" loop muted></audio>
 
   <!-- Track 4 -->
   <p>aco2_4.wav</p>
-  <button class="muteButton" data-track="3">Unmute</button>
+  <button class="muteButton" data-track="3">O</button>
   <audio class="track" src="audio/paul_aco2_4.wav" loop muted></audio>
 
   <!-- Track 5 -->
   <p>aco2_5.wav</p>
-  <button class="muteButton" data-track="4">Unmute</button>
+  <button class="muteButton" data-track="4">O</button>
   <audio class="track" src="audio/paul_aco2_5.wav" loop muted></audio>
 
   <script>
@@ -50,22 +91,3 @@
         track.play().catch(() => {
           console.log("User interaction required to start audio.");
         });
-      });
-      startButton.disabled = true;
-      startButton.textContent = "All Playing (Muted)";
-    });
-
-    // Individual mute/unmute buttons
-    muteButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const index = button.getAttribute('data-track');
-        const track = tracks[index];
-
-        track.muted = !track.muted;
-        button.textContent = track.muted ? 'Unmute' : 'Mute';
-      });
-    });
-  </script>
-
-</body>
-</html>
