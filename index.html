@@ -2,45 +2,70 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>loss1</title>
+  <title>William & Paul</title>
   <style>
     body {
+      background-color: white;
+      color: black;
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 5px;
+    }
+
+    h1 em {
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 30px;
+    }
+
+    /* Buttons */
+    #startAll, #muteAll {
       background-color: black;
       color: white;
       font-family: Garamond, serif;
-    }
-
-    h1, p {
-      margin: 5px 0;
-    }
-
-    /* Start and Mute All buttons */
-    #startAll, #muteAll {
-      background-color: #333;
-      color: white;
-      font-family: Garamond, serif;
-      font-size: 18px;
-      padding: 12px 25px;
+      font-size: 16px;
+      padding: 10px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-bottom: 20px;
-      margin-right: 10px;
+      margin-right: 15px;
+      margin-bottom: 30px;
     }
 
     #startAll:hover, #muteAll:hover {
-      background-color: #555;
+      background-color: #333;
     }
 
-    /* Volume sliders styled for black/white theme */
+    /* Track container */
+    .track-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .track-label {
+      width: 50px;
+      text-align: right;
+      margin-right: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
     .volumeSlider {
       -webkit-appearance: none;
-      width: 200px;
+      width: 250px;
       height: 6px;
-      background: #555;
+      background: #ccc;
       border-radius: 3px;
       outline: none;
-      margin-bottom: 15px;
       cursor: pointer;
     }
 
@@ -48,17 +73,17 @@
       -webkit-appearance: none;
       width: 16px;
       height: 16px;
-      background: white;
+      background: black;
       border-radius: 50%;
       cursor: pointer;
       border: none;
-      margin-top: -5px; /* center thumb */
+      margin-top: -5px;
     }
 
     .volumeSlider::-moz-range-thumb {
       width: 16px;
       height: 16px;
-      background: white;
+      background: black;
       border-radius: 50%;
       border: none;
       cursor: pointer;
@@ -67,50 +92,112 @@
     .volumeSlider::-ms-thumb {
       width: 16px;
       height: 16px;
-      background: white;
+      background: black;
       border-radius: 50%;
       border: none;
       cursor: pointer;
-    }
-
-    p {
-      margin: 5px 0;
     }
   </style>
 </head>
 <body>
 
-  <h1>loss and change</h1>
-  <p>Every track on its own, together</p>
+  <h1>William <em>&</em> Paul</h1>
+  <h2>loss and change</h2>
 
-  <!-- Buttons -->
+  <!-- Control Buttons -->
   <button id="startAll">Start All</button>
   <button id="muteAll">Mute All</button>
 
-  <!-- Track 1 -->
-  <p>aco2_1.wav</p>
-  <input type="range" class="volumeSlider" data-track="0" min="0" max="1" step="0.01" value="1">
-  <audio class="track" src="audio/paul_aco2_1.wav" loop></audio>
+  <!-- Tracks -->
+  <div class="track-container">
+    <div class="track-label">I</div>
+    <input type="range" class="volumeSlider" data-track="0" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/1_1.wav" loop></audio>
+  </div>
 
-  <!-- Track 2 -->
-  <p>aco2_2.wav</p>
-  <input type="range" class="volumeSlider" data-track="1" min="0" max="1" step="0.01" value="1">
-  <audio class="track" src="audio/paul_aco2_2.wav" loop></audio>
+  <div class="track-container">
+    <div class="track-label">II</div>
+    <input type="range" class="volumeSlider" data-track="1" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/2_1.wav" loop></audio>
+  </div>
 
-  <!-- Track 3 -->
-  <p>aco2_3.wav</p>
-  <input type="range" class="volumeSlider" data-track="2" min="0" max="1" step="0.01" value="1">
-  <audio class="track" src="audio/paul_aco2_3.wav" loop></audio>
+  <div class="track-container">
+    <div class="track-label">III</div>
+    <input type="range" class="volumeSlider" data-track="2" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/2test_1.wav" loop></audio>
+  </div>
 
-  <!-- Track 4 -->
-  <p>aco2_4.wav</p>
-  <input type="range" class="volumeSlider" data-track="3" min="0" max="1" step="0.01" value="1">
-  <audio class="track" src="audio/paul_aco2_4.wav" loop></audio>
+  <div class="track-container">
+    <div class="track-label">IV</div>
+    <input type="range" class="volumeSlider" data-track="3" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/3_1.wav" loop></audio>
+  </div>
 
-  <!-- Track 5 -->
-  <p>aco2_5.wav</p>
-  <input type="range" class="volumeSlider" data-track="4" min="0" max="1" step="0.01" value="1">
-  <audio class="track" src="audio/paul_aco2_5.wav" loop></audio>
+  <div class="track-container">
+    <div class="track-label">V</div>
+    <input type="range" class="volumeSlider" data-track="4" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/3_2.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">VI</div>
+    <input type="range" class="volumeSlider" data-track="5" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/4_1.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">VII</div>
+    <input type="range" class="volumeSlider" data-track="6" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/4test_1.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">VIII</div>
+    <input type="range" class="volumeSlider" data-track="7" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_0.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">IX</div>
+    <input type="range" class="volumeSlider" data-track="8" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_1.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">X</div>
+    <input type="range" class="volumeSlider" data-track="9" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_2.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">XI</div>
+    <input type="range" class="volumeSlider" data-track="10" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_3.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">XII</div>
+    <input type="range" class="volumeSlider" data-track="11" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_4.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">XIII</div>
+    <input type="range" class="volumeSlider" data-track="12" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_5.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">XIV</div>
+    <input type="range" class="volumeSlider" data-track="13" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_6.wav" loop></audio>
+  </div>
+
+  <div class="track-container">
+    <div class="track-label">XV</div>
+    <input type="range" class="volumeSlider" data-track="14" min="0" max="1" step="0.01" value="1">
+    <audio class="track" src="audio/paul_aco2_8.wav" loop></audio>
+  </div>
 
   <script>
     const tracks = document.querySelectorAll('.track');
@@ -118,13 +205,11 @@
     const startButton = document.getElementById('startAll');
     const muteButton = document.getElementById('muteAll');
 
-    // Start all tracks simultaneously
+    // Start all tracks
     startButton.addEventListener('click', () => {
       tracks.forEach(track => {
-        track.volume = 1; // start unmuted at full volume
-        track.play().catch(() => {
-          console.log("User interaction required to start audio.");
-        });
+        track.volume = 1;
+        track.play().catch(() => console.log("User interaction required to play audio."));
       });
       startButton.disabled = true;
       startButton.textContent = "All Playing";
@@ -141,8 +226,7 @@
     // Individual volume sliders
     sliders.forEach((slider, i) => {
       slider.addEventListener('input', () => {
-        const track = tracks[i];
-        track.volume = parseFloat(slider.value);
+        tracks[i].volume = parseFloat(slider.value);
       });
     });
   </script>
