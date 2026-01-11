@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>loss and change</title>
+  <title>loss1</title>
   <style>
     body {
       background-color: black;
@@ -11,10 +11,11 @@
     }
 
     h1, p {
-      margin: 20px 0;
+      margin: 5px 0;
     }
 
-    #startAll {
+    /* Start and Mute All buttons */
+    #startAll, #muteAll {
       background-color: #333;
       color: white;
       font-family: Garamond, serif;
@@ -24,16 +25,56 @@
       border-radius: 5px;
       cursor: pointer;
       margin-bottom: 20px;
+      margin-right: 10px;
     }
 
-    #startAll:hover {
+    #startAll:hover, #muteAll:hover {
       background-color: #555;
     }
 
+    /* Volume sliders styled for black/white theme */
     .volumeSlider {
+      -webkit-appearance: none;
       width: 200px;
+      height: 6px;
+      background: #555;
+      border-radius: 3px;
+      outline: none;
       margin-bottom: 15px;
       cursor: pointer;
+    }
+
+    .volumeSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      margin-top: -5px; /* center thumb */
+    }
+
+    .volumeSlider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .volumeSlider::-ms-thumb {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 5px 0;
     }
   </style>
 </head>
@@ -42,8 +83,9 @@
   <h1>loss and change</h1>
   <p>Every track on its own, together</p>
 
-  <!-- Start all tracks button -->
+  <!-- Buttons -->
   <button id="startAll">Start All</button>
+  <button id="muteAll">Mute All</button>
 
   <!-- Track 1 -->
   <p>aco2_1.wav</p>
@@ -74,6 +116,7 @@
     const tracks = document.querySelectorAll('.track');
     const sliders = document.querySelectorAll('.volumeSlider');
     const startButton = document.getElementById('startAll');
+    const muteButton = document.getElementById('muteAll');
 
     // Start all tracks simultaneously
     startButton.addEventListener('click', () => {
@@ -87,11 +130,18 @@
       startButton.textContent = "All Playing";
     });
 
+    // Mute all tracks
+    muteButton.addEventListener('click', () => {
+      tracks.forEach((track, i) => {
+        track.volume = 0;
+        sliders[i].value = 0;
+      });
+    });
+
     // Individual volume sliders
-    sliders.forEach(slider => {
+    sliders.forEach((slider, i) => {
       slider.addEventListener('input', () => {
-        const index = slider.getAttribute('data-track');
-        const track = tracks[index];
+        const track = tracks[i];
         track.volume = parseFloat(slider.value);
       });
     });
