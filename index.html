@@ -3,15 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>loss and change</title>
+
   <style>
+    /* ===== PAGE BACKGROUND ===== */
     body {
-      background-color: white;
-      color: black;
+      background-image: url("images/wp_design.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
       font-family: Garamond, serif;
+      color: black;
+
       display: flex;
       flex-direction: column;
       align-items: center;
+
       margin: 40px;
+    }
+
+    /* Soft overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: -1;
     }
 
     h1 {
@@ -20,188 +41,176 @@
       text-align: center;
     }
 
-    /* Buttons */
-    #startAll, #muteAll {
+    /* ===== BUTTONS ===== */
+    #startAll,
+    #muteAll {
       background-color: white;
       color: black;
       font-family: Garamond, serif;
       font-size: 14px;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border: 1px solid black;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
       margin: 0 10px 30px 10px;
     }
 
-    #startAll:hover, #muteAll:hover {
-      background-color: #f0f0f0;
+    #startAll:hover,
+    #muteAll:hover {
+      background-color: #f2f2f2;
     }
 
-    /* Track container */
+    /* ===== TRACK LAYOUT ===== */
     .track-container {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
     }
 
     .track-label {
-      width: 120px;
+      width: 160px;
       text-align: right;
       margin-right: 20px;
-      font-weight: bold;
+      font-size: 14px;
     }
 
-    /* Sleek sliders */
+    /* ===== SLIDERS ===== */
     .volumeSlider {
       -webkit-appearance: none;
       width: 100%;
-      height: 8px;
-      background: #ddd;
-      border-radius: 4px;
+      height: 6px;
+      background: #ccc;
+      border-radius: 3px;
       outline: none;
-      transition: background 0.3s;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
     .volumeSlider:hover {
-      background: #bbb;
+      background: #aaa;
     }
 
     .volumeSlider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       background: black;
       border-radius: 50%;
+      border: none;
       cursor: pointer;
-      border: 2px solid white;
-      box-shadow: 0 0 2px rgba(0,0,0,0.5);
-      transition: transform 0.1s;
-    }
-
-    .volumeSlider::-webkit-slider-thumb:hover {
-      transform: scale(1.2);
     }
 
     .volumeSlider::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       background: black;
       border-radius: 50%;
-      border: 2px solid white;
-      cursor: pointer;
-      box-shadow: 0 0 2px rgba(0,0,0,0.5);
-    }
-
-    .volumeSlider::-ms-thumb {
-      width: 18px;
-      height: 18px;
-      background: black;
-      border-radius: 50%;
-      border: 2px solid white;
+      border: none;
       cursor: pointer;
     }
   </style>
 </head>
+
 <body>
 
   <h1>loss and change</h1>
 
-  <!-- Buttons -->
   <div>
     <button id="startAll">Start All</button>
     <button id="muteAll">Mute All</button>
   </div>
 
-  <!-- Tracks -->
+  <!-- TRACKS -->
+
   <div class="track-container">
     <div class="track-label">1_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="0" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/1_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">2_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="1" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/2_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">2test_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="2" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/2test_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">3_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="3" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/3_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">3_2.wav</div>
-    <input type="range" class="volumeSlider" data-track="4" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/3_2.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">4_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="5" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/4_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">4test_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="6" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/4test_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_0.wav</div>
-    <input type="range" class="volumeSlider" data-track="7" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_0.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_1.wav</div>
-    <input type="range" class="volumeSlider" data-track="8" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_1.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_2.wav</div>
-    <input type="range" class="volumeSlider" data-track="9" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_2.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_3.wav</div>
-    <input type="range" class="volumeSlider" data-track="10" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_3.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_4.wav</div>
-    <input type="range" class="volumeSlider" data-track="11" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_4.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_5.wav</div>
-    <input type="range" class="volumeSlider" data-track="12" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_5.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_6.wav</div>
-    <input type="range" class="volumeSlider" data-track="13" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_6.wav" loop></audio>
   </div>
 
   <div class="track-container">
     <div class="track-label">paul_aco2_8.wav</div>
-    <input type="range" class="volumeSlider" data-track="14" min="0" max="1" step="0.01" value="1">
+    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/paul_aco2_8.wav" loop></audio>
   </div>
 
@@ -211,18 +220,16 @@
     const startButton = document.getElementById('startAll');
     const muteButton = document.getElementById('muteAll');
 
-    // Start all tracks
     startButton.addEventListener('click', () => {
       tracks.forEach(track => {
-        track.volume = 1;
         track.muted = false;
-        track.play().catch(() => console.log("User interaction required to play audio."));
+        track.volume = 1;
+        track.play().catch(() => {});
       });
       startButton.disabled = true;
       startButton.textContent = "All Playing";
     });
 
-    // Mute all tracks
     muteButton.addEventListener('click', () => {
       tracks.forEach((track, i) => {
         track.volume = 0;
@@ -231,16 +238,14 @@
       });
     });
 
-    // Individual volume sliders (mobile-friendly)
     sliders.forEach((slider, i) => {
-      const setVolume = () => {
-        const val = parseFloat(slider.value);
-        const track = tracks[i];
-        track.volume = val;
-        track.muted = val === 0;
+      const updateVolume = () => {
+        const v = parseFloat(slider.value);
+        tracks[i].volume = v;
+        tracks[i].muted = v === 0;
       };
-      slider.addEventListener('input', setVolume);
-      slider.addEventListener('change', setVolume);
+      slider.addEventListener('input', updateVolume);
+      slider.addEventListener('change', updateVolume);
     });
   </script>
 
