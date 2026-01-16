@@ -5,10 +5,9 @@
   <title>loss and change</title>
 
   <style>
-    /* ===== PAGE BACKGROUND ===== */
     body {
       background-image: url("images/wp_design.png");
-      background-size: cover;
+      background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -23,7 +22,7 @@
       margin: 40px;
     }
 
-    /* Soft overlay for readability */
+    /* Soft overlay for readability (kept white, text stays black) */
     body::before {
       content: "";
       position: fixed;
@@ -41,8 +40,8 @@
       text-align: center;
     }
 
-    /* ===== BUTTONS ===== */
-    #startAll,
+    /* Buttons */
+    #startStop,
     #muteAll {
       background-color: white;
       color: black;
@@ -55,12 +54,12 @@
       margin: 0 10px 30px 10px;
     }
 
-    #startAll:hover,
+    #startStop:hover,
     #muteAll:hover {
       background-color: #f2f2f2;
     }
 
-    /* ===== TRACK LAYOUT ===== */
+    /* Track layout */
     .track-container {
       display: flex;
       align-items: center;
@@ -76,37 +75,36 @@
       font-size: 14px;
     }
 
-    /* ===== SLIDERS ===== */
+    /* Volume sliders */
     .volumeSlider {
       -webkit-appearance: none;
-      width: 100%;
+      width: 220px; /* shorter left/right */
       height: 6px;
       background: #ccc;
       border-radius: 3px;
       outline: none;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
     .volumeSlider:hover {
       background: #aaa;
     }
 
+    /* Slider knob as a small vertical bar */
     .volumeSlider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 14px;
-      height: 14px;
+      width: 6px;
+      height: 18px;
       background: black;
-      border-radius: 50%;
-      border: none;
+      border-radius: 1px;
       cursor: pointer;
     }
 
     .volumeSlider::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
+      width: 6px;
+      height: 18px;
       background: black;
-      border-radius: 50%;
+      border-radius: 1px;
       border: none;
       cursor: pointer;
     }
@@ -118,7 +116,7 @@
   <h1>loss and change</h1>
 
   <div>
-    <button id="startAll">Start All</button>
+    <button id="startStop">Start</button>
     <button id="muteAll">Mute All</button>
   </div>
 
@@ -217,17 +215,24 @@
   <script>
     const tracks = document.querySelectorAll('.track');
     const sliders = document.querySelectorAll('.volumeSlider');
-    const startButton = document.getElementById('startAll');
+    const startStop = document.getElementById('startStop');
     const muteButton = document.getElementById('muteAll');
 
-    startButton.addEventListener('click', () => {
-      tracks.forEach(track => {
-        track.muted = false;
-        track.volume = 1;
-        track.play().catch(() => {});
-      });
-      startButton.disabled = true;
-      startButton.textContent = "All Playing";
+    let isPlaying = false;
+
+    startStop.addEventListener('click', () => {
+      if (!isPlaying) {
+        tracks.forEach(track => {
+          track.muted = false;
+          track.play().catch(() => {});
+        });
+        startStop.textContent = "Stop";
+        isPlaying = true;
+      } else {
+        tracks.forEach(track => track.pause());
+        startStop.textContent = "Start";
+        isPlaying = false;
+      }
     });
 
     muteButton.addEventListener('click', () => {
