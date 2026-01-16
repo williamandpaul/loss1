@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>loss and change</title>
-
   <style>
     html, body {
       margin: 0;
@@ -11,7 +10,7 @@
       min-height: 100%;
       font-family: Garamond, serif;
       background: black;
-      color: black;
+      color: white;
     }
 
     /* Background video */
@@ -28,14 +27,14 @@
       z-index: -2;
     }
 
-    /* Grey overlay on top of video for readability */
+    /* Grey overlay for readability */
     #videoOverlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.4); /* adjust opacity to change grey level */
+      background: rgba(0,0,0,0.4); /* adjust opacity as needed */
       z-index: -1;
     }
 
@@ -54,8 +53,7 @@
     }
 
     /* Buttons */
-    #startStop,
-    #muteAll {
+    #startStop, #muteAll {
       background-color: white;
       color: black;
       font-family: Garamond, serif;
@@ -67,8 +65,7 @@
       margin: 0 10px 30px 10px;
     }
 
-    #startStop:hover,
-    #muteAll:hover {
+    #startStop:hover, #muteAll:hover {
       background-color: #f2f2f2;
     }
 
@@ -104,7 +101,6 @@
       background: #aaa;
     }
 
-    /* Slider knob as a small vertical bar */
     .volumeSlider::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 6px;
@@ -128,7 +124,7 @@
 <body>
 
   <!-- Background video -->
-  <video id="bgVideo" loop muted playsinline preload="auto">
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
     <source src="video/website_test_vid3.mp4" type="video/mp4">
   </video>
   <div id="videoOverlay"></div>
@@ -140,7 +136,7 @@
     <button id="muteAll">Mute All</button>
   </div>
 
-  <!-- TRACKS -->
+  <!-- Audio tracks -->
   <div class="track-container">
     <div class="track-label">1_1.wav</div>
     <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
@@ -228,16 +224,12 @@
 
     startStop.addEventListener('click', () => {
       if (!isPlaying) {
-        // Start video first, muted (satisfies browser autoplay)
-        bgVideo.muted = true;
-        bgVideo.currentTime = 0;
-        bgVideo.play().catch(() => console.log("Video play blocked"));
+        // Video is autoplaying muted, ensure it plays
+        bgVideo.play().catch(() => console.log("Video blocked"));
 
-        // Then start all audio tracks
-        tracks.forEach(track => {
-          track.muted = false;
-          track.play().catch(() => {});
-        });
+        // Start audio tracks
+        tracks.forEach(track => track.muted = false);
+        tracks.forEach(track => track.play().catch(() => {}));
 
         startStop.textContent = "Stop";
         isPlaying = true;
