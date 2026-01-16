@@ -125,7 +125,7 @@
 
   <!-- Background video -->
   <video id="bgVideo" autoplay muted loop playsinline preload="auto">
-    <source src="video/website_test_vid3.mp4" type="video/mp4">
+    <source src="video/website_test_vid.mp4" type="video/mp4">
   </video>
   <div id="videoOverlay"></div>
 
@@ -224,13 +224,9 @@
 
     startStop.addEventListener('click', () => {
       if (!isPlaying) {
-        // Video is autoplaying muted, ensure it plays
-        bgVideo.play().catch(() => console.log("Video blocked"));
-
-        // Start audio tracks
+        bgVideo.play().catch(() => console.log("Video play blocked"));
         tracks.forEach(track => track.muted = false);
         tracks.forEach(track => track.play().catch(() => {}));
-
         startStop.textContent = "Stop";
         isPlaying = true;
       } else {
