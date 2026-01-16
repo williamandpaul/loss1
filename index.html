@@ -27,17 +27,6 @@
       z-index: -2;
     }
 
-    /* Grey overlay for readability */
-    #videoOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4); /* adjust opacity as needed */
-      z-index: -1;
-    }
-
     body {
       display: flex;
       flex-direction: column;
@@ -52,8 +41,7 @@
       color: white;
     }
 
-    /* Buttons */
-    #startStop, #muteAll {
+    #startStop {
       background-color: white;
       color: black;
       font-family: Garamond, serif;
@@ -62,10 +50,10 @@
       border: 1px solid black;
       border-radius: 4px;
       cursor: pointer;
-      margin: 0 10px 30px 10px;
+      margin-bottom: 30px;
     }
 
-    #startStop:hover, #muteAll:hover {
+    #startStop:hover {
       background-color: #f2f2f2;
     }
 
@@ -86,7 +74,6 @@
       color: white;
     }
 
-    /* Volume sliders */
     .volumeSlider {
       -webkit-appearance: none;
       width: 220px;
@@ -120,21 +107,16 @@
     }
   </style>
 </head>
-
 <body>
 
   <!-- Background video -->
   <video id="bgVideo" autoplay muted loop playsinline preload="auto">
-    <source src="video/website_test_vid.mp4" type="video/mp4">
+    <source src="video/website_test_vid_web.mp4" type="video/mp4">
   </video>
-  <div id="videoOverlay"></div>
 
   <h1>loss and change</h1>
 
-  <div>
-    <button id="startStop">Start</button>
-    <button id="muteAll">Mute All</button>
-  </div>
+  <button id="startStop">Start</button>
 
   <!-- Audio tracks -->
   <div class="track-container">
@@ -142,82 +124,23 @@
     <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/1_1.wav" loop></audio>
   </div>
+
   <div class="track-container">
     <div class="track-label">2_1.wav</div>
     <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/2_1.wav" loop></audio>
   </div>
+
   <div class="track-container">
     <div class="track-label">2test_1.wav</div>
     <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
     <audio class="track" src="audio/2test_1.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">3_1.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/3_1.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">3_2.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/3_2.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">4_1.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/4_1.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">4test_1.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/4test_1.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_0.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_0.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_1.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_1.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_2.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_2.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_3.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_3.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_4.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_4.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_5.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_5.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_6.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_6.wav" loop></audio>
-  </div>
-  <div class="track-container">
-    <div class="track-label">paul_aco2_8.wav</div>
-    <input type="range" class="volumeSlider" min="0" max="1" step="0.01" value="1">
-    <audio class="track" src="audio/paul_aco2_8.wav" loop></audio>
   </div>
 
   <script>
     const tracks = document.querySelectorAll('.track');
     const sliders = document.querySelectorAll('.volumeSlider');
     const startStop = document.getElementById('startStop');
-    const muteButton = document.getElementById('muteAll');
     const bgVideo = document.getElementById('bgVideo');
 
     let isPlaying = false;
@@ -235,14 +158,6 @@
         startStop.textContent = "Start";
         isPlaying = false;
       }
-    });
-
-    muteButton.addEventListener('click', () => {
-      tracks.forEach((track, i) => {
-        track.volume = 0;
-        track.muted = true;
-        sliders[i].value = 0;
-      });
     });
 
     sliders.forEach((slider, i) => {
